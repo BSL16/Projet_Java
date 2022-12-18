@@ -2,8 +2,8 @@ public class Main{
     public static void main (String[] args){
         Logement log = new  Logement();
         Logement log1 = new Logement(20, CE.B);
-        System.out.println("votre emprunte carbone logement de log est:" + log.impact+" TCO2 équivalente"); 
-        System.out.println("votre emprunte carbone logement de log1 est:" + log1.impact+" TCO2 équivalente");
+        System.out.println("votre empreinte carbone logement de log est:" + log.impact+" TCO2 équivalente"); 
+        System.out.println("votre empreinte carbone logement de log1 est:" + log1.impact+" TCO2 équivalente");
         System.out.println(log1.toString());
         Logement.impactL_Moy();
         Alimentation ali= new Alimentation ();
@@ -14,17 +14,17 @@ public class Main{
         Alimentation.impactA_Moy();
 
         BienConso bc = new BienConso(7000);
-        System.out.println("votre emprunte carbone bien consommation de bc est:" + bc.impact+" TCO2 équivalente"); 
+        System.out.println("votre empreinte carbone bien consommation de bc est:" + bc.impact+" TCO2 équivalente"); 
         System.out.println(bc.toString());
         BienConso.impactBienC_Moy();
 
         Transport transp = new Transport(true, Taille.P , 3600, 20);
-        System.out.println("votre emprunte carbone Transport de transp est:" + transp.impact+" TCO2 équivalente"); 
+        System.out.println("votre empreinte carbone Transport de transp est:" + transp.impact+" TCO2 équivalente"); 
         System.out.println(transp.toString());
         Transport.impactT_Moy();
 
         Transport transp2 = new Transport(false, Taille.P, 0, 0);
-        System.out.println("votre emprunte carbone Transport de trans2 est:" + transp2.impact+" TCO2 équivalente"); 
+        System.out.println("votre empreinte carbone Transport de trans2 est:" + transp2.impact+" TCO2 équivalente"); 
         System.out.println(transp2.toString());
         Transport.impactT_Moy();
 
