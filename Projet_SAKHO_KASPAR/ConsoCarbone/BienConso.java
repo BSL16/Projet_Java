@@ -13,9 +13,10 @@ public class BienConso extends ConsoCarbone {
     }
     /**Constructeur de BienConso
 	 * @param montant Somme attribue a la BienConso
+     * @throws si montant negatif, on le met e zero
 	 */
     public BienConso(double montant){
-        super(); //appelle au constructeur de la classe mère pour incrémenter id...
+        super(); 
         if(montant>0) {
             this.montant=montant;
         }else {
@@ -35,6 +36,7 @@ public class BienConso extends ConsoCarbone {
     
     /**Setter de Montant
 	 * @param new_mon Montant a modifier
+     * @throws si nouveau montant negatif, on le met e zero
 	 */
     public void set_montant(double new_mon){
         if(new_mon>0) {
@@ -48,21 +50,21 @@ public class BienConso extends ConsoCarbone {
     /**Redefinition de EmpreinteC pour BienConso*/
     @Override
     public void EmpreinteC(){
-        impact=(montant)/1750;
+        set_impact(montant/1750);
     }
     
-    /**Affiche l'impact moyen d'un francais vis a vis de sa BienConso*/
+    /**Affiche l impact moyen d un francais vis a vis de sa BienConso*/
     public static void impactBienC_Moy(){
-        System.out.println("l’empreinte carbone moyenne d’un.e français.e vis-à-vis de ses dépenses par an  est 2 625kg avec"+"\n"+
+        System.out.println("l'empreinte carbone moyenne d'un.e français.e vis-à-vis de ses dépenses par an  est 2 625kg avec"+"\n"+
         "Achat et usages Internet et technologies: 1 180kg,  Autres biens et services: 682kg,  Habillement: 763kg");
     }   
     
-    /**Redefinition de toString pour BienConso
+    /**Redefinition de toString pour BienConso qui retourne les caractéristiques de l'objet courant
 	 * @return Chaine de caracteres representative de l'objet
 	 */
     @Override
-    public String toString(){ //retourne les caractéristiques de l'objet courant
-        return "Bien Consommation [ ID: "+id+",  Montant dépenses/an: "+montant+",  Impact en TCO2:"+impact+" ]";
+    public String toString(){ 
+        return "Bien Consommation [ ID: "+get_id()+",  Montant dépenses/an: "+montant+",  Impact en TCO2:"+get_impact()+" ]";
     }
 
 

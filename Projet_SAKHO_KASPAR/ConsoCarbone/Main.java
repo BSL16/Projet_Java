@@ -1,30 +1,32 @@
+package consoCarbone;
+
 public class Main{
     public static void main (String[] args){
         Logement log = new  Logement();
         Logement log1 = new Logement(20, CE.B);
-        System.out.println("votre empreinte carbone logement de log est:" + log.impact+" TCO2 équivalente"); 
-        System.out.println("votre empreinte carbone logement de log1 est:" + log1.impact+" TCO2 équivalente");
+        System.out.println("votre empreinte carbone logement de log est:" + log.get_impact()+" TCO2 équivalente"); 
+        System.out.println("votre empreinte carbone logement de log1 est:" + log1.get_impact()+" TCO2 équivalente");
         System.out.println(log1.toString());
         Logement.impactL_Moy();
         Alimentation ali= new Alimentation ();
         Alimentation ali1= new Alimentation(0.5, 0.3);
-        System.out.println("votre empreinte carbone pour ali est:" + ali.impact+" TCO2 équivalente");
-        System.out.println("votre empreinte carbone pour ali1 est:" + ali1.impact+" TCO2 équivalente");
+        System.out.println("votre empreinte carbone pour ali est:" + ali.get_impact()+" TCO2 équivalente");
+        System.out.println("votre empreinte carbone pour ali1 est:" + ali1.get_impact()+" TCO2 équivalente");
         System.out.println(ali1.toString());
         Alimentation.impactA_Moy();
 
         BienConso bc = new BienConso(7000);
-        System.out.println("votre empreinte carbone bien consommation de bc est:" + bc.impact+" TCO2 équivalente"); 
+        System.out.println("votre empreinte carbone bien consommation de bc est:" + bc.get_impact()+" TCO2 équivalente"); 
         System.out.println(bc.toString());
         BienConso.impactBienC_Moy();
 
         Transport transp = new Transport(true, Taille.P , 3600, 20);
-        System.out.println("votre empreinte carbone Transport de transp est:" + transp.impact+" TCO2 équivalente"); 
+        System.out.println("votre empreinte carbone Transport de transp est:" + transp.get_impact()+" TCO2 équivalente"); 
         System.out.println(transp.toString());
         Transport.impactT_Moy();
 
         Transport transp2 = new Transport(false, Taille.P, 0, 0);
-        System.out.println("votre empreinte carbone Transport de trans2 est:" + transp2.impact+" TCO2 équivalente"); 
+        System.out.println("votre empreinte carbone Transport de trans2 est:" + transp2.get_impact()+" TCO2 équivalente"); 
         System.out.println(transp2.toString());
         Transport.impactT_Moy();
 

@@ -19,15 +19,17 @@ public class Train_Bus extends Transport {
     @Override   
     public void EmpreinteC(){
         if(get_possede()){
-            impact=(get_kilomAnne())*(1.93*0.0001) + get_taille().get_emission()/get_amortissement() + 85;
+            set_impact((get_kilomAnne())*(1.93*0.0001) + get_taille().get_emission()/get_amortissement() + 85);
         }
         else {
-            impact=85;
+            set_impact(85);
             }
         }
-    /** @return String renvoie les caractéristiques de l'utilisateur vis a vis de son utilisation de Train */
+    /** 
+     * renvoie les caractéristiques de l'utilisateur vis a vis de son utilisation de Train
+     * @return String  */
     @Override
     public String toString(){ 
-    return "Train_Bus [ ID: "+id+",  Impact en TCO2: "+impact+" ]";
+    return "Train_Bus [ ID: "+get_id()+",  Impact en TCO2: "+get_impact()+" ]";
     }
 }

@@ -1,8 +1,9 @@
 package consoCarbone;
-
-/*  Comme que tous les français ont la même empreunteC de ServicesPublics, on peutt utiliser le design pattern Singleton. Ainsi, 
-la classe va avoir qu'une seul instance.pour cela on utilisera la classe comme une énumération d'un seul attribut
+/**  Comme que tous les français ont la meme empreunteC de ServicesPublics, on peut utiliser le design pattern Singleton. Ainsi, 
+la classe va avoir qu une seul instance .Pour cela, on peut considerer la classe comme une énumération d un seul attribut
+De plus, son constructeur sera private
 */
+
 /**ServicesPublics est la consommation carbone liee aux services publics
 *@author Marc Kaspar et Bamba SAKHO
 *@version 1
@@ -17,20 +18,20 @@ public class ServicesPublics extends ConsoCarbone {
     /**Redefinition de EmpreinteC pour ServicesPublics*/
     @Override 
     public void EmpreinteC(){
-        this.impact=IMP;
+        set_impact(IMP);
     }
     
-    /**Affiche l'impact moyen d'un francais vis a vis de ses services*/
+    /**Affiche l impact moyen d un francais vis a vis de ses services*/
     public static void impactSP_Moy(){
-        System.out.println("l’empreinte carbone d’un.e français.e vis-à-vis des Services Publics et Santé par an  est 1 489kg ");
+        System.out.println("l'empreinte carbone d'un.e français.e vis-à-vis des Services Publics et Santé par an  est 1 489kg ");
     }
     
-    /**Redefinition de toString pour ServicesPublics 
-	 * @return Chaine de caracteres representative de l'objet
+    /**Redefinition de toString pour ServicesPublics qui retourne les caracteristiques de l objet courant
+	 * @return String Chaine de caracteres representative de l objet
 	 */
     @Override
     public String toString(){
-        return "Logement [ ID: "+id+", impact en TCO2: "+impact+"  ]";
+        return "Logement [ ID: "+get_id()+", impact en TCO2: "+get_impact()+"  ]";
     }
     
 }

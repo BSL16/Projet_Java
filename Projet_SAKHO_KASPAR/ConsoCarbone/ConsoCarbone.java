@@ -1,19 +1,22 @@
-// classe abstraite car contient une méthode abstarite. Donc, on ne peut pas l'instancier
-//il implémente l'interface génératrice ( de type Consocarone) Comparable. Ainsi, on doir redefinir la methode compareTo/
 package consoCarbone;
-/**consoCarbone represente un poste de consommation carbone generique
-*@author marc kaspar
+
+import java.io.Serializable;
+
+/**consoCarbone represente un poste de consommation carbone generique.Il est une  classe abstraite car contient une méthode abstraite. 
+Donc, on ne peut pas l'instancier.Il implémente l'interface génératrice ( de type Consocarbone) Comparable. 
+Ainsi, on doit redefinir la methode compareTo. Les instances de Consocarbone sont désormais comparable et la comparaison 
+se base sur les impacts. Il implemente l interface Serializable pour pouvoir stocker et transmettre ses objetsLa comparaison est pour les impacts
+*@author Marc Kaspar et Bamba SAKHO
 *@version 1
 */ 
-public abstract class ConsoCarbone implements Comparable<ConsoCarbone> { 
-    protected final int id;  // sera protected pour que les classes filles aient id
-    protected double impact; // protected pour que les classes filles l'accédent. Dans ce cas, on peut supprimer l'attribut
-    // impact dans les classes filles et ses getters et setters
+public abstract class ConsoCarbone implements Comparable<ConsoCarbone>, Serializable { 
+    private final int id;  
+    private double impact; 
     private static int cpt=0; //Compteur de l'id
     
     /**Constructeur par defaut de consoCarbone*/
     public ConsoCarbone(){
-        cpt++;             //pour que le compteur commence par 1
+        cpt++; //pour que le compteur commence par 1
         id=cpt;
         impact=0;
     }
@@ -52,13 +55,13 @@ public abstract class ConsoCarbone implements Comparable<ConsoCarbone> {
 	 */
     public abstract void EmpreinteC();
     
-    /**Redefinition de toString pour consoCarbone
-	 * @return Chaine de caracteres representative de l'objet
+    /**Redefinition de toString  de la classe object comme une méthode abstraite pour consoCarbone
+	 * @return String Chaine de caracteres representative de l'objet
 	 */
-    @Override // on redéfinit la méthode toString de la classe object comme une méthode abstraite
+    @Override 
     public abstract String toString();
 
-    /**Redefinition de compareTO pour consoCarbone
+    /**Redefinition de compareTo pour consoCarbone
 	 * @return un entier negatif, zero, ou un entier positif si l'objet est inferieur, egal, ou superieur a l'objet specifie
 	 */
     @Override

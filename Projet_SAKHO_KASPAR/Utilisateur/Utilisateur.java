@@ -1,6 +1,8 @@
 package utilisateur;
 
-import java.util.TreeSet;
+import java.util.*;
+import java.io.*;
+import java.lang.*;
 
 import consoCarbone.Alimentation;
 import consoCarbone.BienConso;
@@ -9,8 +11,6 @@ import consoCarbone.Logement;
 import consoCarbone.ServicesPublics;
 import consoCarbone.Transport;
 
-import java.util.List;
-import java.util.SortedSet;
 
 /**Utilisateur est la consommation carbone d un individu
 *@author Marc Kaspar et Bamba SAKHO
@@ -37,6 +37,50 @@ public class Utilisateur {
         this.transport=transport;
         this.services=services;
     }
+
+    /**
+     * constructeur de la classe Utilisateur pour initialiser un utilisateur ou une utilisatrice a partir de fichiers textes
+     * @param File f_A fichier qui contiennent l'objet de type Alimentation.
+     *  @param File f_BC fichier qui contiennent l'objet de type BienConso.
+     *  @param File f_Lo fichier qui contiennent l'objet de type List<Logement>.
+     *  @param File f_Tr fichier qui contiennent l'objet de type List<Transport>.
+     *  @param File f_SP fichier qui contiennent l'objet de type ServicesPublics.
+     * @throws IOException exception levee s il existe un fichier en argument qui n existe pas ou n est pas accessible
+     * @throws Exception donne le parcours complet de l'exception levee avec la methode printStackTrace
+     */
+    public  Utilisateur(File f_A, File f_BC, File f_Lo, File f_Tr, File f_SP) throws IOException, Exception {
+        try{
+        ObjectInputStream ois_A = new ObjectInputStream(new FileInputStream(f_A));
+        ObjectInputStream ois_BC = new ObjectInputStream(new FileInputStream(f_BC));
+        ObjectInputStream ois_Lo = new ObjectInputStream(new FileInputStream(f_Lo));
+        ObjectInputStream ois_Tr = new ObjectInputStream(new FileInputStream(f_Tr));
+        ObjectInputStream ois_SP = new ObjectInputStream(new FileInputStream(f_SP));
+        } catch (IOException e){
+            System.out.println ("il existe un fichier en argument qui n'existe pas ou n'est pas accessible");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        ObjectInputStream ois_A = new ObjectInputStream(new FileInputStream(f_A));
+        ObjectInputStream ois_BC = new ObjectInputStream(new FileInputStream(f_BC));
+        ObjectInputStream ois_Lo = new ObjectInputStream(new FileInputStream(f_Lo));
+        ObjectInputStream ois_Tr = new ObjectInputStream(new FileInputStream(f_Tr));
+        ObjectInputStream ois_SP = new ObjectInputStream(new FileInputStream(f_SP));
+
+        alimentation = (Alimentation) ois_A.readObject();
+        bienConso = (BienConso) ois_BC.readObject();
+        logement = (List<Logement>) ois_Lo.readObject();
+        transport=(List<Transport>) ois_Tr.readObject();
+        services=(ServicesPublics) ois_SP.readObject();
+        ois_A.close();
+        ois_BC.close();
+        ois_Lo.close();
+        ois_Tr.close();
+        ois_SP.close();
+
+    }
+
+
+
     //getters et setters
     /**Getter de Alimentation
      * @return Alimentation de l individu
@@ -130,36 +174,43 @@ public class Utilisateur {
         services.get_impact()+" concernant son utilisation des services publics");
     }
     
-    /**ordonne les consommations carbone de l’utilisateur.rice dans une liste puis présente l’information obtenue à ce.tte dernier.e, puis fait des recommendations pour obtenir
-un mode de vie plus durable*/
-    public void ordonnerConso() {
-    	SortedSet<ConsoCarbone> consoList = new TreeSet<ConsoCarbone>();
-    	consoList.add(alimentation);
-    	consoList.add(bienConso);
-        for (Logement a: logement) {
-        	consoList.add(a);
+    /**
+     * Ordre_Info_ConsoCarbone ordonne les consommations carbone de l utilisateur.rice dans une liste
+    puis presente l information obtenue a ce.tte dernier.e, puis fait des recommendations pour obtenir un mode de vie plus durable
+     * @return ConsoCarbone l objet de type ConsoCarbone qui a le plus grand impact carbone pour l utilisateur donnee 
+     */
+    public ConsoCarbone Ordre_Info_ConsoCarbone(){
+        List<ConsoCarbone> List_Conso = new ArrayList<>();
+        List_Conso.add(alimentation);
+        List_Conso.add(bienConso);
+        List_Conso.add(logement);
+        List_Conso.add(transport);
+        List_Conso.add(services);
+        List_Conso.sort(null); // car ConsoCarbone implémente l'interface Comparable 
+        System.out.println("L'ordre croissant de votre consommation carbone est" + List_Conso);
+        n=List_Conso.size();
+        switch(List_Conso.get(n-1).getClass()){
+            case Alimentation:
+            System.out.println("Diminuez votre consommation de viande");
+            return List_Conso.get(n-1);
+            
+            case BienConso :
+            System.out.println("Réduisez vos dépenses annuelles");
+            return List_Conso.get(n-1);
+            
+            case Logement :
+            System.out.println("Réduisez la consommatrion énergétique à la maison en éteignez les lampes,isolez votre maison...");
+            return List_Conso.get(n-1);
+            
+            case Transport :
+            System.out.println("Diminuez vos kilomètres en voiture voire se passer de voiture, Eviter l avion autant que possible");
+            return List_Conso.get(n-1);
+
+            //si c'est les services publiques qui consomment le plus, on ne peut rien conseiller
         }
-        for (Transport a: transport) {
-        	consoList.add(a);
-        }
-    	consoList.add(services);
-    	System.out.println("Votre consommation la plus importante concerne la" + consoList.last().getClass().getSimpleName());
-    	if(consoList.last() instanceof Alimentation) {
-    		System.out.println("Consommez plus de plats à base de produits végétals");
-    	}
-    	if(consoList.last() instanceof Logement) {
-    		System.out.println("Eteignez la lumière lorsque vous n'êtes pas présent dans une salle");
-    	}
-    	
-    	if(consoList.last() instanceof Transport) {
-    		System.out.println("Priviégiez l'utilisation des transports en communs ou du vélo lorsque cela est possible");
-    	}
-    	
-    	if(consoList.last() instanceof BienConso) {
-    		System.out.println("Réduisez votre consomation de biens");
-    	}
-    	
-    	//On ne peut rien recommander si la consomation la plus importante est les services publics
+
+        
     }
+    
     
 }

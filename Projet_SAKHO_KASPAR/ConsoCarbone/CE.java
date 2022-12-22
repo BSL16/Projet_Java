@@ -1,5 +1,5 @@
 package consoCarbone;
-/**Enumeration representant la classe énergétique d'un Logement*/
+/**Enumeration representant la classe energetique d un Logement*/
 public enum CE {
 	/**Classe A*/
     A(0.005), 
@@ -22,7 +22,7 @@ public enum CE {
     }
     
     /**Getter de alpha_ce
-     * @return Coefficient associe à la classe energetique
+     * @return double Coefficient associe a la classe energetique
      */
     public double getAlpha_ce() {
         return alpha_ce;

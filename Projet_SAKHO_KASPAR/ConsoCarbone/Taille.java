@@ -11,9 +11,9 @@ public enum Taille {
     private Taille(double emission){ //le constructeur toujours en private
         this.emission= emission;
     }
-    //getters et pas de setters car emmision est final
-    /**Getter d'Emission
-	 * @return Emission correspondant a cette taille de vehicule
+    //pas de setters car emmision est final
+    /**Getter d Emission
+	 * @return double Emission correspondant a cette taille de vehicule
 	 */
     public double get_emission(){
         return emission;

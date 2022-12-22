@@ -12,7 +12,7 @@ public class Transport extends ConsoCarbone {
     
     /**Constructeur par defaut de Transport*/
     public Transport(){
-        super(); //appelle au constructeur de la classe mère pour incrémenter id...
+        super(); 
         possede=false;
     }
     /**Constructeur de Transport
@@ -20,9 +20,14 @@ public class Transport extends ConsoCarbone {
 	 * @param taille Taille du vehicule
 	 * @param kilomAnnee Nombre de kilometre parcourus par an
 	 * @param amortissement Duree de conservation du vehicule
+     * @throws IllegalArgumentException le cas kilomAnne ou ammortissement est negatif
 	 */
-    public Transport(boolean possede, Taille taille, int kilomAnnee, int amortissement){ 
-            super(); //appelle au constructeur de la classe mère pour incrémenter id...
+    public Transport(boolean possede, Taille taille, int kilomAnnee, int amortissement)throws IllegalArgumentException{ 
+            super(); 
+
+            if (kilomAnnee<0 | amortissement<0)
+                throw new IllegalArgumentException("kilomAnne et ammortissement doivent être positive");
+
             this.possede=possede;
             this.taille=taille;
             this.kilomAnnee=kilomAnnee;
@@ -31,7 +36,6 @@ public class Transport extends ConsoCarbone {
 
         }
     
-        // getters et setters 
     	/**Getter de Possede
     	 * @return Possession ou non d'un vehicule
     	 */
@@ -78,43 +82,51 @@ public class Transport extends ConsoCarbone {
         
         /**Setter de KilomAnnee
     	 * @param KA Nombre de kilometre parcourus par an a modifier
+         * @throws IllegalArgumentException le cas ou kilomAnne est negatif
     	 */
-        public void set_kilomAnnee(int KA){
+        public void set_kilomAnnee(int KA)throws IllegalArgumentException{
+            if (KA<0)
+                throw new IllegalArgumentException("le nouveau kilomAnne doit être positive. Cependant, kilomAnne est "+KA);
+
             kilomAnnee=KA;
             EmpreinteC(); //pour mettre à jour this.impact
         }
         
         /**Setter d'Amortissement 
     	 * @param amor Duree de conservation du vehicule a modifier
+         * @throws IllegalArgumentException le cas ou amortissement est negatif
     	 */
-        public void set_amortissement(int amor){
+        public void set_amortissement(int amor)throws IllegalArgumentException{
+            if (amor<0)
+                throw new IllegalArgumentException("le nouveau ammortissement doit être positive. Cependant, l'ammortissement est "+amor);
+
             amortissement=amor;
             EmpreinteC(); //pour mettre à jour this.impact
         }
         
-        /**Redefinition de EmpreinteC pour Transport*/
+        /**Redefinition de EmpreinteC pour Transport qui calcule l empreinte carbone*/
         @Override
         public void EmpreinteC(){
             if(possede){
-                impact=(kilomAnnee)*(1.93*0.0001) + taille.get_emission()/amortissement;
+                set_impact((kilomAnnee)*(1.93*0.0001) + taille.get_emission()/amortissement);
             }
             else {
-                impact=0;
+                set_impact(0);
                 }
             }
         
-        /**Affiche l'impact moyen d'un francais vis a vis de son transport*/
+        /**Affiche l impact moyen d'un francais vis a vis de son transport*/
         public static void impactT_Moy(){
-            System.out.println("l’empreinte carbone moyenne d’un.e français.e vis-à-vis de son Transport par an  est 2 920kg avec"+"\n"+
+            System.out.println("l'empreinte carbone moyenne d'un.e français.e vis-à-vis de son Transport par an  est 2 920kg avec"+"\n"+
             "Voiture: 1 972kg,  Avion: 480kg,  Fret et messagerie: 383kg,  Train et bus: 85kg");
         }   
 
-        /**Redefinition de toString pour Transport 
-    	 * @return Chaine de caracteres representative de l'objet
+        /**Redefinition de toString pour Transport qui retourne les caracteristiques de l objet courant
+    	 * @return Chaine de caracteres representative de l objet
     	 */
         @Override
-        public String toString(){ //retourne les caractéristiques de l'objet courant
-            return "Transport [ ID: "+id+",  Possede une voiture: "+possede+",  Taille:"+taille+ "\n"+
-            ",  Kilomètres parcourues/an: "+kilomAnnee+",  amortissement: "+amortissement+" Impact en TCO2: "+impact+" ]";
+        public String toString(){ 
+            return "Transport [ ID: "+get_id()+",  Possede une voiture: "+possede+",  Taille:"+taille+ "\n"+
+            ",  Kilomètres parcourues/an: "+kilomAnnee+",  amortissement: "+amortissement+" Impact en TCO2: "+get_impact()+" ]";
         }
     }
