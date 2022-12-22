@@ -183,34 +183,33 @@ public class Utilisateur {
         List<ConsoCarbone> List_Conso = new ArrayList<>();
         List_Conso.add(alimentation);
         List_Conso.add(bienConso);
-        List_Conso.add(logement);
-        List_Conso.add(transport);
+        for (Logement l : logement){
+        List_Conso.add(l);
+        }
+        for (Transport t : transport){
+            List_Conso.add(t);
+            }
         List_Conso.add(services);
         List_Conso.sort(null); // car ConsoCarbone implémente l'interface Comparable 
         System.out.println("L'ordre croissant de votre consommation carbone est" + List_Conso);
-        n=List_Conso.size();
-        switch(List_Conso.get(n-1).getClass()){
-            case Alimentation:
+        int n= List_Conso.size();
+        if (List_Conso.get(n-1) instanceof Alimentation){
             System.out.println("Diminuez votre consommation de viande");
-            return List_Conso.get(n-1);
-            
-            case BienConso :
-            System.out.println("Réduisez vos dépenses annuelles");
-            return List_Conso.get(n-1);
-            
-            case Logement :
-            System.out.println("Réduisez la consommatrion énergétique à la maison en éteignez les lampes,isolez votre maison...");
-            return List_Conso.get(n-1);
-            
-            case Transport :
-            System.out.println("Diminuez vos kilomètres en voiture voire se passer de voiture, Eviter l avion autant que possible");
-            return List_Conso.get(n-1);
-
-            //si c'est les services publiques qui consomment le plus, on ne peut rien conseiller
         }
+            
+        else if (List_Conso.get(n-1) instanceof BienConso){
+            System.out.println("Réduisez vos dépenses annuelles");
+        }
+            
+        else if (List_Conso.get(n-1) instanceof Logement){
+            System.out.println("Réduisez la consommatrion énergétique à la maison en éteignez les lampes,isolez votre maison...");
+        }
+            
+        else if (List_Conso.get(n-1) instanceof Transport){
+            System.out.println("Diminuez vos kilomètres en voiture voire se passer de voiture, Eviter l avion autant que possible");
+        }
+        //si c'est ServicesPerbuliques, on ne peut rien recommender
+        return List_Conso.get(n-1);
 
-        
     }
-    
-    
 }

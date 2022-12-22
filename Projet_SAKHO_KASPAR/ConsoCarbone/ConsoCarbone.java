@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**consoCarbone represente un poste de consommation carbone generique.Il est une  classe abstraite car contient une méthode abstraite. 
 Donc, on ne peut pas l'instancier.Il implémente l'interface génératrice ( de type Consocarbone) Comparable. 
 Ainsi, on doit redefinir la methode compareTo. Les instances de Consocarbone sont désormais comparable et la comparaison 
-se base sur les impacts. Il implemente l interface Serializable pour pouvoir stocker et transmettre ses objetsLa comparaison est pour les impacts
+se base sur les impacts. Il implemente l interface Serializable pour pouvoir stocker et transmettre ses objets. La comparaison est pour les impacts
 *@author Marc Kaspar et Bamba SAKHO
 *@version 1
 */ 

@@ -13,7 +13,7 @@ public class BienConso extends ConsoCarbone {
     }
     /**Constructeur de BienConso
 	 * @param montant Somme attribue a la BienConso
-     * @throws si montant negatif, on le met e zero
+     * @throws si montant negatif, on le met a zero
 	 */
     public BienConso(double montant){
         super(); 

@@ -40,23 +40,22 @@ public class Population {
      * info_Population est une methode qui donne des recommendations sur une population donnee pour reduire les emissions carbones
      */
     public void info_Population(){
-        int cpt_al=0 , cpt_bc=0, cpt_lo=0 , cpt_tr=0; cpt_se=0;
+        int cpt_al=0 , cpt_bc=0, cpt_lo=0 , cpt_tr=0, cpt_se=0;
         for (Utilisateur u : populat){ 
         
-            switch(u.Ordre_Info_ConsoCarbone().getClass()){
-                case Alimentation:
+            if (u.Ordre_Info_ConsoCarbone() instanceof Alimentation)
                     cpt_al++;
-                case BienConso:
+            else if (u.Ordre_Info_ConsoCarbone() instanceof BienConso)
                     cpt_bc++;
-                case Logement: 
+            else if (u.Ordre_Info_ConsoCarbone() instanceof Logement)
                     cpt_lo++;
-                case Transport:
+            else if (u.Ordre_Info_ConsoCarbone() instanceof Transport)
                     cpt_tr++;
-                case ServicesPublics:
+            else
                     cpt_se++;
-            }
+        
         }
-            
+        //pour avoir le max
         int[] tab_cpt = {cpt_al, cpt_bc, cpt_lo, cpt_tr, cpt_se};
         int max=cpt_al;
         for (int i : tab_cpt){
@@ -65,16 +64,15 @@ public class Population {
             }
         }
 
-        switch(max){
-            case cpt_al:
-                System.out.println("La population doit dimunier sa consommation de viande");
-            case cpt_bc:
-                System.out.println("La population doit dimunier ses dépenses en bien de consommations");
-            case cpt_lo:
-                System.out.println("La population doit dimunier sa consommation énergétique dans leurs maisons");
-            case cpt_tr:
+        if(max==cpt_al)
+            System.out.println("La population doit dimunier sa consommation de viande");
+        else if(max==cpt_bc)
+            System.out.println("La population doit dimunier ses dépenses en bien de consommations");
+        else if(max==cpt_lo)
+            System.out.println("La population doit dimunier sa consommation énergétique dans leurs maisons");
+        else if(max==cpt_tr)
             System.out.println("La population doit diminuer ses kilomètres en voiture voire se passer de voiture et éviter l avion autant que possible");
         }
     }
 
-}
+

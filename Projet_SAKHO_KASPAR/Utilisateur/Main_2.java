@@ -8,6 +8,9 @@ import consoCarbone.Logement;
 import consoCarbone.ServicesPublics;
 import consoCarbone.Transport;
 import consoCarbone.Taille;
+import consoCarbone.CE;
+import consoCarbone.Train_Bus;
+
 
 
 public class Main_2 {
@@ -26,9 +29,6 @@ public class Main_2 {
 
         //Menu interactif pour Transport par exemple
 
-        System.out.println("Quelle est votre Nom :");
-        String nom_1 = scan.nextLine();
-
         System.out.println("Possedez-vous une voiture ? True or False : ");
         Boolean possede_= scan.nextBoolean();
 
@@ -39,7 +39,7 @@ public class Main_2 {
         int amor_= scan.nextInt();
 
         Transport trp = new Transport(possede_,Taille.P, KilAnnee_, amor_);
-        System.out.println("L'empreinte carbone vis à vis de votre transport de "+nom_1+" est : "+ trp.get_impact());
+        System.out.println("L'empreinte carbone vis à vis de votre transport de "+nom+" est : "+ trp.get_impact());
 
         scan.close();
         
